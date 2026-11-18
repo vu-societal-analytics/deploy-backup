@@ -1,10 +1,11 @@
-# Backups
+# deploy-backup
 
-The nightly backup of a server: database dumps (`/opt/backup/hooks.d/*.sh`), then `/opt` and all Docker volumes with restic, encrypted. Data with a short retention is in `/srv/temp`, which is not backed up. Setup, checks and restore: [docs/install/backups.md](../../docs/install/backups.md).
+The nightly backup of a server of the Societal Analytics Lab: `/opt` with [restic](https://restic.net), encrypted, after checking that the apps' database dumps are recent. Cloned to `/opt/backup` on every server.
+
+Setup, checks and restore: [Backups](https://vu-societal-analytics.github.io/societal-analytics-lab-infra/install/backups/) in the lab's infrastructure documentation.
 
 | File | Contents |
 | --- | --- |
-| `backup.sh` | The backup: hooks, `restic backup`, removing old backups, `restic check` |
+| `backup.sh` | The backup: checks the dumps, `restic backup`, removes old backups, `restic check`, reports to the monitoring URL |
 | `backup.service`, `backup.timer` | Run it every night (03:30, within half an hour) |
 | `restic.sh` | restic with this server's settings, for checks and restores: `sudo ./restic.sh snapshots` |
-| `postgres-hook.example.sh` | Template for the dump of an app's PostgreSQL database |
