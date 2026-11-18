@@ -8,4 +8,5 @@ Setup, checks and restore: [Backups](https://vu-societal-analytics.github.io/soc
 | --- | --- |
 | `backup.sh` | The backup: checks the dumps, `restic backup`, removes old backups, `restic check`, reports to the monitoring URL |
 | `backup.service`, `backup.timer` | Run it every night (03:30, within half an hour) |
+| `setup.sh` | Sets it all up on a server: `sudo /opt/backup/setup.sh [<ping url>]` |
 | `restic.sh` | restic with this server's settings, for checks and restores: `sudo ./restic.sh snapshots` |
